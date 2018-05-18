@@ -1,23 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 using Domain;
 using Endpoint1;
 using Endpoint1.Commands;
 using EntityFramework.FakeItEasy;
-using FakeItEasy;
-using FakeItEasy.ExtensionSyntax;
 using Moq;
-using NServiceBus;
-using NServiceBus.Extensibility;
-using NServiceBus.Persistence;
 using NServiceBus.Testing;
 using NUnit.Framework;
-using ObjectExtensions = FakeItEasy.ExtensionSyntax.Full.ObjectExtensions;
 using Order = Domain.Order;
 
 namespace UnitTests
