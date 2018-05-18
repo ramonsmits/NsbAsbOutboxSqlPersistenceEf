@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Domain;
 using Endpoint2.Commands;
 using Infra.NServiceBus.Persistence;
@@ -13,7 +14,7 @@ namespace Endpoint2
         public async Task Handle(PlaceOrderCommand placeOrderCommand, IMessageHandlerContext context)
         {
             log.Info($"Endpoint2 Received PlaceOrderCommand: {placeOrderCommand.OrderNumber}");
-            context.Extensions.TryGet("DbContext", out OrderDbContext dataContext);
+            if (!context.Extensions.TryGet("DbContext", out OrderDbContext dataContext)) throw new Exception("Order is null");
 
             var order = Domain.Order.Create(placeOrderCommand.OrderId, placeOrderCommand.OrderNumber);
             order.PlaceOrder(placeOrderCommand.PlacedAtDate);
