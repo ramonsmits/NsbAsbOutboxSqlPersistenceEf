@@ -10,23 +10,12 @@ namespace Infra.NServiceBus.Persistence
     {
         public void Customize(EndpointConfiguration configuration)
         {
-            var connectionString = Environment.GetEnvironmentVariable("AzureDb.ConnectionString");
-
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                throw new Exception("Database connectionstring is not set");
-            }
-
             configuration.EnableInstallers();
             var persistence = configuration.UsePersistence<SqlPersistence>();
             persistence.TablePrefix("Endpoint_");
             var dialect = persistence.SqlDialect<SqlDialect.MsSqlServer>();
             dialect.Schema("OrderContext");
-            persistence.ConnectionBuilder(
-                connectionBuilder: () =>
-                {
-                    return new SqlConnection(connectionString);
-                });
+            persistence.ConnectionBuilder(connectionBuilder: () => new SqlConnection("server=.;Integrated Security=True"));
         }
     }
 }
