@@ -11,25 +11,33 @@ namespace Endpoint2
         {
             public async Task Start(IMessageSession session)
             {
+                Task.Run(() => Loop(session));
+            }
+
+            async void Loop(IMessageSession session)
+            {
                 Console.WriteLine("Press enter to send Place Order Command");
 
-                var key = Console.ReadKey();
-
-                if (key.Key == ConsoleKey.Enter)
+                while (true)
                 {
-                    for (int i = 0; i < 1; i++)
-                    {
-                        var orderNumber = i + 1;
-                        await session.Send("Endpoint2",
-                            new PlaceOrderCommand
-                            {
-                                OrderId = Guid.NewGuid(),
-                                OrderNumber = orderNumber,
-                                PlacedAtDate = DateTime.UtcNow
-                            });
-                        Console.WriteLine($"Place Order Command sent {orderNumber}");
-                    }
+                    var key = Console.ReadKey();
 
+                    if (key.Key == ConsoleKey.Enter)
+                    {
+                        for (int i = 0; i < 10; i++)
+                        {
+                            var orderNumber = i + 1;
+                            await session.Send("Endpoint2",
+                                new PlaceOrderCommand
+                                {
+                                    OrderId = Guid.NewGuid(),
+                                    OrderNumber = orderNumber,
+                                    PlacedAtDate = DateTime.UtcNow
+                                });
+                            Console.WriteLine($"Place Order Command sent {orderNumber}");
+                        }
+
+                    }
                 }
             }
 
