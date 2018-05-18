@@ -6,7 +6,7 @@ namespace Infra.NServiceBus.Transport
     {
         public void Customize(EndpointConfiguration endpointConfiguration)
         {
-            var transport = endpointConfiguration.UseTransport<LearningTransport>();
+            var transport = endpointConfiguration.UseTransport<MsmqTransport>();
         }
     }
 }
