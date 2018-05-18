@@ -9,7 +9,7 @@ namespace Endpoint2
     {
         public class CommandSender : IWantToRunWhenEndpointStartsAndStops
         {
-            public Task Start(IMessageSession session)
+            public async Task Start(IMessageSession session)
             {
                 Console.WriteLine("Press enter to send Place Order Command");
 
@@ -17,16 +17,20 @@ namespace Endpoint2
 
                 if (key.Key == ConsoleKey.Enter)
                 {
-                    for (int i = 0; i < 10; i++)
+                    for (int i = 0; i < 1; i++)
                     {
                         var orderNumber = i + 1;
-                        session.Send("Endpoint2", new PlaceOrderCommand() { OrderId = Guid.NewGuid(), OrderNumber = orderNumber, PlacedAtDate = DateTime.UtcNow });
+                        await session.Send("Endpoint2",
+                            new PlaceOrderCommand
+                            {
+                                OrderId = Guid.NewGuid(),
+                                OrderNumber = orderNumber,
+                                PlacedAtDate = DateTime.UtcNow
+                            });
                         Console.WriteLine($"Place Order Command sent {orderNumber}");
                     }
 
                 }
-
-                return Task.CompletedTask;
             }
 
             public Task Stop(IMessageSession session)
