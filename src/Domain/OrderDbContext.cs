@@ -5,7 +5,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Domain
 {
-    public class OrderDbContext : DbContext
+    public class OrderDbContext : DbContext, IOrderDbContext
     {
         public OrderDbContext()
         {
@@ -16,7 +16,7 @@ namespace Domain
             TurnOffAutomaticDatabaseCreationAndSchemaUpdates();
         }
 
-        public DbSet<Order> Orders { get; set; }
+        public IDbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
