@@ -109,6 +109,7 @@
     <Compile Include="CommandSender.cs" />
     <Compile Include="Commands\PlaceOrderCommand.cs" />
     <Compile Include="IOrderStorageContext.cs" />
+    <Compile Include="OrderDbContextContextExtensions.cs" />
     <Compile Include="OrderStorageContext.cs" />
     <Compile Include="PlaceOrderCommandHandler.cs" />
     <Compile Include="EndpointConfiguration.cs" />

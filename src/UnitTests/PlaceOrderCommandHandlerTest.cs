@@ -37,7 +37,8 @@ namespace UnitTests
                 PlacedAtDate = placedAtDate
             };
 
-            var context = new TestableMessageHandlerContext();
+            OrderDbContextContextExtensions.FakeOrderDbContext = dbContext;
+
             handler = new PlaceOrderCommandHandler(new OrderStorageContext());
 
             //TODO: Question? How do you test this, since I cannot inject the OrderDbContext into the handler

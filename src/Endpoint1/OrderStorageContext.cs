@@ -6,7 +6,7 @@ namespace Endpoint1
 {
     public class OrderStorageContext : IOrderStorageContext
     {
-        public OrderDbContext GetOrderDbContext(SynchronizedStorageSession session)
+        public IOrderDbContext GetOrderDbContext(SynchronizedStorageSession session)
         {
             var sqlPersistenceSession = session.SqlPersistenceSession();
             var context = new OrderDbContext(sqlPersistenceSession.Connection);
