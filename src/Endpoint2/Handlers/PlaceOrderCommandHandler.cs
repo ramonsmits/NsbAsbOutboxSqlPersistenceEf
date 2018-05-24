@@ -1,8 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
-using Domain;
+﻿using System.Threading.Tasks;
 using Endpoint2.Commands;
-using Infra.NServiceBus.Persistence;
 using NServiceBus;
 using NServiceBus.Logging;
 
@@ -11,14 +8,23 @@ namespace Endpoint2
     public class PlaceOrderCommandHandler : IHandleMessages<PlaceOrderCommand>
     {
         static ILog log = LogManager.GetLogger<PlaceOrderCommand>();
-        public async Task Handle(PlaceOrderCommand placeOrderCommand, IMessageHandlerContext context)
+        readonly IOrderStorageContext orderStorageContext;
+
+        public PlaceOrderCommandHandler(IOrderStorageContext orderStorageContext)
+        {
+            this.orderStorageContext = orderStorageContext;
+        }
+
+        public Task Handle(PlaceOrderCommand placeOrderCommand, IMessageHandlerContext context)
         {
             log.Info($"Endpoint2 Received PlaceOrderCommand: {placeOrderCommand.OrderNumber}");
-            if (!context.Extensions.TryGet("DbContext", out OrderDbContext dataContext)) throw new Exception("Order is null");
+
+            var dataContext = orderStorageContext.GetOrderDbContext(context.SynchronizedStorageSession);
 
             var order = Domain.Order.Create(placeOrderCommand.OrderId, placeOrderCommand.OrderNumber);
             order.PlaceOrder(placeOrderCommand.PlacedAtDate);
             dataContext.Orders.Add(order);
+            return  Task.CompletedTask;
         }
     }
 }

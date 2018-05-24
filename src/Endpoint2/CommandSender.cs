@@ -9,9 +9,9 @@ namespace Endpoint2
     {
         public class CommandSender : IWantToRunWhenEndpointStartsAndStops
         {
-            public async Task Start(IMessageSession session)
+            public  Task Start(IMessageSession session)
             {
-                Task.Run(() => Loop(session));
+                return Task.Run(() => Loop(session));
             }
 
             async void Loop(IMessageSession session)
@@ -33,7 +33,8 @@ namespace Endpoint2
                                     OrderId = Guid.NewGuid(),
                                     OrderNumber = orderNumber,
                                     PlacedAtDate = DateTime.UtcNow
-                                });
+                                })
+                                .ConfigureAwait(false);
                             Console.WriteLine($"Place Order Command sent {orderNumber}");
                         }
 

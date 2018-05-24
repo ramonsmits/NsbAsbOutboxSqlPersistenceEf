@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Domain;
-using Endpoint1;
-using Endpoint1.Commands;
+using Endpoint2;
+using Endpoint2.Commands;
 using EntityFramework.FakeItEasy;
 using Moq;
 using NServiceBus.Testing;
@@ -38,7 +38,6 @@ namespace UnitTests
             };
 
             var context = new TestableMessageHandlerContext();
-            handler = new PlaceOrderCommandHandler(new OrderStorageContext());
 
             //TODO: Question? How do you test this, since I cannot inject the OrderDbContext into the handler
             //In the handler there is the context.SynchronizedStorageSession.FromCurrentSession() that returns a new OrderDbContext
@@ -48,12 +47,18 @@ namespace UnitTests
             //Then I realized that U guys have your own TestingFramework that I installed so that I could get a TestableMessageHandlerContext
             //but cannot find a way to set the session.SqlPersistenceSession();
 
-            var mock = new Mock<IOrderStorageContext>();
-            mock.SetupIgnoreArgs(x => x.GetOrderDbContext(null)).Returns(dbContext);
-           
+            var orderStorageContextMock = new Mock<IOrderStorageContext>();
+            orderStorageContextMock.SetupIgnoreArgs(x => x.GetOrderDbContext(null)).Returns(dbContext);
+        
+
+            handler = new PlaceOrderCommandHandler(orderStorageContextMock.Object);
+
             try
             {
-                await handler.Handle(placeOrderCommand, context).ConfigureAwait(false);
+                await handler.Handle(placeOrderCommand, context)
+                    .ConfigureAwait(false);
+                await dbContext.SaveChangesAsync()
+                    .ConfigureAwait(false);
             }
             catch (Exception e)
             {

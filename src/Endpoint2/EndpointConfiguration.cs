@@ -13,8 +13,12 @@ class Program
         endpointConfiguration.DefineEndpointName("Endpoint2");
         endpointConfiguration.EnableOutbox();
         endpointConfiguration.EnablePersistAndPublish<OrderDbContext>();
-        var instance = await Endpoint.Start(endpointConfiguration);
-        await Task.Delay(-1);
-        await instance.Stop();
+        var instance = await Endpoint.Start(endpointConfiguration)
+            .ConfigureAwait(false);
+        await Task.Delay(-1)
+            .ConfigureAwait(false);
+        // Unreachable
+        await instance.Stop()
+            .ConfigureAwait(false);
     }
 }
