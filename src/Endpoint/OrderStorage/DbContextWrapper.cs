@@ -9,9 +9,9 @@ class DbContextWrapper<T> : IDbContextWrapper<T> where T : DbContext
 {
     public T Get(IMessageHandlerContext context)
     {
-        if (context.Extensions.TryGet(out T dataContext))
+        if (context.Extensions.TryGet(out Lazy<T> dataContext))
         {
-            return dataContext;
+            return dataContext.Value;
         }
         throw new Exception($"No DbContext set for '{typeof(T)}.");
     }
