@@ -109,6 +109,13 @@
     <Compile Include="Bootstrap\Bootstrapper.cs" />
     <Compile Include="CommandSender.cs" />
     <Compile Include="Commands\PlaceOrderCommand.cs" />
+    <Compile Include="Configuration\AuditErrorConfiguration.cs" />
+    <Compile Include="Configuration\PersistAndPublishBehavior.cs" />
+    <Compile Include="Configuration\PersistenceConfiguration.cs" />
+    <Compile Include="Configuration\RecoveryConfiguration.cs" />
+    <Compile Include="Configuration\SerializationConfiguration.cs" />
+    <Compile Include="Configuration\TransportConfiguration.cs" />
+    <Compile Include="EndpointConfigurationExtensions.cs" />
     <Compile Include="OrderStorage\IOrderStorageContext.cs" />
     <Compile Include="OrderStorage\OrderStorageContext.cs" />
     <Compile Include="Handlers\PlaceOrderCommandHandler.cs" />
@@ -128,10 +135,6 @@
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{11b8c825-077f-4726-a55c-842277850a32}</Project>
       <Name>Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Infra.NServiceBus\Infra.NServiceBus.csproj">
-      <Project>{1c31f37c-053b-478a-a0fa-aecc0408d4fd}</Project>
-      <Name>Infra.NServiceBus</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

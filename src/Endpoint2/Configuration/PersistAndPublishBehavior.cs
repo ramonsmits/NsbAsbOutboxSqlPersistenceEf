@@ -20,7 +20,7 @@ public class PersistAndPublishBehavior<TDbContext> : Behavior<IInvokeHandlerCont
             await next()
                 .ConfigureAwait(false);
 
-            await DataContextPersistence.SaveChangesAsync(dbContext)
+            await dbContext.SaveChangesAsync()
                 .ConfigureAwait(false);
         }
     }
