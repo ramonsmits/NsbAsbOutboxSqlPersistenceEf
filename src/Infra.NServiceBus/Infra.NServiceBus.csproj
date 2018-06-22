@@ -140,8 +140,6 @@
     <Compile Include="SanitizationStrategy.cs" />
     <Compile Include="Persistence\DataContextPersistence.cs" />
     <Compile Include="Recovery\RecoveryConfiguration.cs" />
-    <Compile Include="Conventions\ConventionsRegistration.cs" />
-    <Compile Include="Conventions\MessageConventions.cs" />
     <Compile Include="EndpointConfigurationExtensions.cs" />
     <Compile Include="Persistence\PersistAndPublishBehavior.cs" />
     <Compile Include="Persistence\PersistenceConfiguration.cs" />
