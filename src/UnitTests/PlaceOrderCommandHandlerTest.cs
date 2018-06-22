@@ -35,7 +35,7 @@ namespace UnitTests
 
             var context = new TestableMessageHandlerContext();
 
-            var orderStorageContextMock = new Mock<IOrderStorageContext>();
+            var orderStorageContextMock = new Mock<IDbContextWrapper<OrderDbContext>>();
             orderStorageContextMock.SetupIgnoreArgs(x => x.Get(null)).Returns(dbContext);
 
             handler = new PlaceOrderCommandHandler(orderStorageContextMock.Object);

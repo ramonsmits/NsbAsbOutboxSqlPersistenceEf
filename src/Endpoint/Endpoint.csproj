@@ -114,8 +114,8 @@
     <Compile Include="Configuration\SerializationConfiguration.cs" />
     <Compile Include="Configuration\TransportConfiguration.cs" />
     <Compile Include="EndpointConfigurationExtensions.cs" />
-    <Compile Include="OrderStorage\IOrderStorageContext.cs" />
-    <Compile Include="OrderStorage\OrderStorageContext.cs" />
+    <Compile Include="OrderStorage\IDbContextWrapper.cs" />
+    <Compile Include="OrderStorage\DbContextWrapper.cs" />
     <Compile Include="Handlers\PlaceOrderCommandHandler.cs" />
     <Compile Include="EndpointConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

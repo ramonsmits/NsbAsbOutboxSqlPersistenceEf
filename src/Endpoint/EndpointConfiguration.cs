@@ -7,11 +7,10 @@ class Program
     {
         var endpointConfiguration = new EndpointConfiguration("Endpoint");
         endpointConfiguration.EnableOutbox();
+        endpointConfiguration.EnableInstallers();
 
         endpointConfiguration.ConfigureDbContextManager<OrderDbContext>();
-        endpointConfiguration.RegisterComponents(c=>c.ConfigureComponent<OrderStorageContext>(DependencyLifecycle.SingleInstance));
-        
-        endpointConfiguration.EnableInstallers();
+
 
         var instance = await Endpoint.Start(endpointConfiguration);
         await Task.Delay(-1);

@@ -3,9 +3,9 @@ using NServiceBus;
 
 public class PlaceOrderCommandHandler : IHandleMessages<PlaceOrderCommand>
 {
-    readonly IOrderStorageContext orderStorageContext;
+    readonly IDbContextWrapper<OrderDbContext> orderStorageContext;
 
-    public PlaceOrderCommandHandler(IOrderStorageContext orderStorageContext)
+    public PlaceOrderCommandHandler(IDbContextWrapper<OrderDbContext> orderStorageContext)
     {
         this.orderStorageContext = orderStorageContext;
     }
