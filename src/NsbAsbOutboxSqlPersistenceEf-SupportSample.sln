@@ -5,12 +5,7 @@ VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{11B8C825-077F-4726-A55C-842277850A32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endpoint2", "Endpoint2\Endpoint2.csproj", "{0F372666-A717-4CB9-B459-4509CEC47C55}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseScripts", "DatabaseScripts", "{9799F327-BFD6-4F30-9A25-4880A8203767}"
-	ProjectSection(SolutionItems) = preProject
-		SetupSchemaAndTable.sql = SetupSchemaAndTable.sql
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endpoint", "Endpoint2\Endpoint.csproj", "{0F372666-A717-4CB9-B459-4509CEC47C55}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{AD9F7C5D-2E69-4D43-9CD6-AE54C7915896}"
 EndProject

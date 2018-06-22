@@ -2,5 +2,5 @@
 
 public interface IOrderStorageContext
 {
-    OrderDbContext GetOrderDbContext(IMessageHandlerContext session);
+    OrderDbContext Get(IMessageHandlerContext session);
 }

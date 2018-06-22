@@ -36,16 +36,14 @@ namespace UnitTests
             var context = new TestableMessageHandlerContext();
 
             var orderStorageContextMock = new Mock<IOrderStorageContext>();
-            orderStorageContextMock.SetupIgnoreArgs(x => x.GetOrderDbContext(null)).Returns(dbContext);
+            orderStorageContextMock.SetupIgnoreArgs(x => x.Get(null)).Returns(dbContext);
 
             handler = new PlaceOrderCommandHandler(orderStorageContextMock.Object);
 
             try
             {
-                await handler.Handle(placeOrderCommand, context)
-                    .ConfigureAwait(false);
-                await dbContext.SaveChangesAsync()
-                    .ConfigureAwait(false);
+                await handler.Handle(placeOrderCommand, context);
+                await dbContext.SaveChangesAsync();
             }
             catch (Exception e)
             {

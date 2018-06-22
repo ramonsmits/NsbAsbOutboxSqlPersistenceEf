@@ -2,13 +2,16 @@
 using NServiceBus;
 
 /// <summary>
-/// This only exist to warp the extension method as these cannot easily to mocked for unit testing.
+/// This only exist to wrap the extension method as these cannot easily to mocked for unit testing.
 /// </summary>
 class OrderStorageContext : IOrderStorageContext
 {
-    public OrderDbContext GetOrderDbContext(IMessageHandlerContext context)
+    public OrderDbContext Get(IMessageHandlerContext context)
     {
-        if (!context.Extensions.TryGet(out OrderDbContext dataContext)) throw new Exception($"No DbContext set for '{typeof(OrderDbContext)}.");
-        return dataContext;
+        if (context.Extensions.TryGet(out OrderDbContext dataContext))
+        {
+            return dataContext;
+        }
+        throw new Exception($"No DbContext set for '{typeof(OrderDbContext)}.");
     }
 }

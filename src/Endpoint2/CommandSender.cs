@@ -18,26 +18,23 @@ class EndpointConfig
         {
             Console.WriteLine("Press enter to send Place Order Command");
 
+            var i = 0;
+
             while (true)
             {
                 var key = Console.ReadKey();
 
                 if (key.Key == ConsoleKey.Enter)
                 {
-                    for (int i = 0; i < 10; i++)
-                    {
-                        var orderNumber = i + 1;
-                        await session.Send("Endpoint2",
-                            new PlaceOrderCommand
-                            {
-                                OrderId = Guid.NewGuid(),
-                                OrderNumber = orderNumber,
-                                PlacedAtDate = DateTime.UtcNow
-                            })
-                            .ConfigureAwait(false);
-                        Console.WriteLine($"Place Order Command sent {orderNumber}");
-                    }
-
+                    await session.SendLocal(
+                        new PlaceOrderCommand
+                        {
+                            OrderId = Guid.NewGuid(),
+                            OrderNumber = ++i,
+                            PlacedAtDate = DateTime.UtcNow
+                        })
+                        .ConfigureAwait(false);
+                    Console.WriteLine($"Place Order Command sent {i}");
                 }
             }
         }

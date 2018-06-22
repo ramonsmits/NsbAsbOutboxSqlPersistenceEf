@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using NServiceBus;
 using NServiceBus.Pipeline;
 
-public class PersistAndPublishBehavior<TDbContext> : Behavior<IInvokeHandlerContext> where TDbContext : DbContext
+public class DbContextManagerBehavior<TDbContext> : Behavior<IInvokeHandlerContext> where TDbContext : DbContext
 {
     public override async Task Invoke(IInvokeHandlerContext context, Func<Task> next)
     {

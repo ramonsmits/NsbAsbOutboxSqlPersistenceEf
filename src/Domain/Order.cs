@@ -4,6 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 public class Order
 {
+    Order()
+    {
+    }
+
     [Key, Column(Order = 0)]
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public Guid OrderId { get; set; }

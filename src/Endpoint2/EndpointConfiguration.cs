@@ -5,20 +5,17 @@ class Program
 {
     public static async Task Main()
     {
-        var endpointConfiguration = new EndpointConfiguration("Endpoint2");
-        endpointConfiguration.DefineEndpointName("Endpoint2");
+        var endpointConfiguration = new EndpointConfiguration("Endpoint");
         endpointConfiguration.EnableOutbox();
-        endpointConfiguration.EnablePersistAndPublish<OrderDbContext>();
+
+        endpointConfiguration.ConfigureDbContextManager<OrderDbContext>();
         endpointConfiguration.RegisterComponents(c=>c.ConfigureComponent<OrderStorageContext>(DependencyLifecycle.SingleInstance));
         
         endpointConfiguration.EnableInstallers();
 
-        var instance = await Endpoint.Start(endpointConfiguration)
-            .ConfigureAwait(false);
-        await Task.Delay(-1)
-            .ConfigureAwait(false);
+        var instance = await Endpoint.Start(endpointConfiguration);
+        await Task.Delay(-1);
         // Unreachable
-        await instance.Stop()
-            .ConfigureAwait(false);
+        await instance.Stop();
     }
 }

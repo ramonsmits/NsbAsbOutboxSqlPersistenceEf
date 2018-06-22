@@ -4,6 +4,6 @@ class TransportConfiguration : INeedInitialization
 {
     public void Customize(EndpointConfiguration endpointConfiguration)
     {
-        endpointConfiguration.UseTransport<MsmqTransport>();
+        endpointConfiguration.UseTransport<LearningTransport>();
     }
 }
