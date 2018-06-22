@@ -1,10 +1,6 @@
-﻿using Domain;
-using NServiceBus;
+﻿using NServiceBus;
 
-namespace Endpoint2
+public interface IOrderStorageContext
 {
-    public interface IOrderStorageContext
-    {
-        OrderDbContext GetOrderDbContext(IMessageHandlerContext session);
-    }
+    OrderDbContext GetOrderDbContext(IMessageHandlerContext session);
 }

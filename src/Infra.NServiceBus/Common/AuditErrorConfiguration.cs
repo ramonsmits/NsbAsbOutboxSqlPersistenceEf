@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NServiceBus;
+﻿using NServiceBus;
 
-namespace Infra.NServiceBus.Common
+class AuditErrorConfiguration : INeedInitialization
 {
-    class AuditErrorConfiguration : INeedInitialization
+    public void Customize(EndpointConfiguration endpointConfiguration)
     {
-        public void Customize(EndpointConfiguration endpointConfiguration)
-        {
-            endpointConfiguration.AuditProcessedMessagesTo("audit");
-            endpointConfiguration.SendFailedMessagesTo("error");
-        }
+        endpointConfiguration.AuditProcessedMessagesTo("audit");
+        endpointConfiguration.SendFailedMessagesTo("error");
     }
 }

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
-using Domain;
-using Endpoint2;
-using Infra.NServiceBus;
+﻿using System.Threading.Tasks;
 using NServiceBus;
-
 
 class Program
 {

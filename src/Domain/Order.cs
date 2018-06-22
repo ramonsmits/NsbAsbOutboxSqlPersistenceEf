@@ -2,33 +2,25 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Domain
+public class Order
 {
-    public class Order
+    [Key, Column(Order = 0)]
+    [DatabaseGenerated(DatabaseGeneratedOption.None)]
+    public Guid OrderId { get; set; }
+    public int OrderNumber { get; set; }
+    public DateTime PlacedAtDate { get; set; }
+
+    public static Order Create(Guid orderId, int orderNumber)
     {
-        internal Order()
+        return new Order
         {
+            OrderId = orderId,
+            OrderNumber = orderNumber
+        };
+    }
 
-        }
-
-        [Key, Column(Order = 0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public Guid OrderId { get; set; }
-        public int OrderNumber { get; set; }
-        public DateTime PlacedAtDate { get; set; }
-  
-        public static Order Create(Guid orderId, int orderNumber)
-        {
-            return new Order()
-            {
-                OrderId = orderId,
-                OrderNumber = orderNumber
-            };
-        }
-
-        public void PlaceOrder(DateTime placedAtDate)
-        {
-            PlacedAtDate = placedAtDate;
-        }
+    public void PlaceOrder(DateTime placedAtDate)
+    {
+        PlacedAtDate = placedAtDate;
     }
 }

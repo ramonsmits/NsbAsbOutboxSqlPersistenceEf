@@ -1,12 +1,9 @@
 ﻿using NServiceBus;
 
-namespace Infra.NServiceBus.Transport
+class TransportConfiguration : INeedInitialization
 {
-    public class TransportConfiguration : INeedInitialization
+    public void Customize(EndpointConfiguration endpointConfiguration)
     {
-        public void Customize(EndpointConfiguration endpointConfiguration)
-        {
-            var transport = endpointConfiguration.UseTransport<MsmqTransport>();
-        }
+        var transport = endpointConfiguration.UseTransport<MsmqTransport>();
     }
 }

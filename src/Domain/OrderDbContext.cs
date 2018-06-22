@@ -3,31 +3,28 @@ using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
-namespace Domain
+public class OrderDbContext : DbContext
 {
-    public class OrderDbContext : DbContext
+    public OrderDbContext()
     {
-        public OrderDbContext()
-        {
-        }
+    }
 
-        public OrderDbContext(IDbConnection connection) : base((DbConnection)connection, false)
-        {
-            TurnOffAutomaticDatabaseCreationAndSchemaUpdates();
-        }
+    // Needed, is used via Activator.CreateInstance
+    public OrderDbContext(IDbConnection connection) : base((DbConnection)connection, false)
+    {
+        TurnOffAutomaticDatabaseCreationAndSchemaUpdates();
+    }
 
-        public DbSet<Order> Orders { get; set; }
+    public IDbSet<Order> Orders { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            //modelBuilder.HasDefaultSchema("OrderContext");
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    {
+        modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            base.OnModelCreating(modelBuilder);
-        }
-        private void TurnOffAutomaticDatabaseCreationAndSchemaUpdates()
-        {
-            Database.SetInitializer<OrderDbContext>(null);
-        }
+        base.OnModelCreating(modelBuilder);
+    }
+    void TurnOffAutomaticDatabaseCreationAndSchemaUpdates()
+    {
+        Database.SetInitializer<OrderDbContext>(null);
     }
 }
