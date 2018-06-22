@@ -40,16 +40,8 @@ namespace UnitTests
 
             handler = new PlaceOrderCommandHandler(orderStorageContextMock.Object);
 
-            try
-            {
-                await handler.Handle(placeOrderCommand, context);
-                await dbContext.SaveChangesAsync();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            await handler.Handle(placeOrderCommand, context);
+            await dbContext.SaveChangesAsync();
         }
 
         [Test]
